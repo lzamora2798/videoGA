@@ -1,0 +1,44 @@
+import pygame
+pygame.init()
+#crear la escena
+screen = pygame.display.set_mode((800,600)) #ancho, alto
+running = True
+pygame.display.set_caption("Space Invaders")
+
+#jugador
+playerIMG = pygame.image.load("player.png")
+playerX = 750
+playerY= 500
+dx =0
+dy =0
+def player(x,y): #esto es una funcion
+    screen.blit(playerIMG,(x,y))
+
+while running:
+    screen.fill((255, 0, 255))
+    for event in pygame.event.get(): #dentro todo este for todos los eventos que suceden en la pantalla
+        if event.type == pygame.QUIT:
+            running=False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT:
+                dx = 0.8
+            if event.key == pygame.K_LEFT:
+                dx = -0.8
+            if event.key == pygame.K_UP:
+                dy = -0.8
+            if event.key == pygame.K_DOWN:
+                dy =  0.8
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_RIGHT:
+                dx = 0
+            if event.key == pygame.K_LEFT:
+                dx = 0
+            if event.key == pygame.K_UP:
+                dy = 0
+            if event.key == pygame.K_DOWN:
+                dy = 0
+
+    playerX += dx
+    playerY += dy
+    player(playerX, playerY)
+    pygame.display.update()
